@@ -1,0 +1,44 @@
+<!--
+AnimCJK 2016-2019 Copyright Francois Mizessyn - https://github.com/parsimonhi/animCJK
+Derived from:
+    MakeMeAHanzi project - https://github.com/skishore/makemeahanzi
+    Arphic PL KaitiM GB font
+    Arphic PL UKai font
+You can redistribute and/or modify this file under the terms of the Arphic Public License
+as published by Arphic Technology Co., Ltd.
+You should have received a copy of this license along with this file.
+If not, see http://ftp.gnu.org/non-gnu/chinese-fonts-truetype/LICENSE.
+-->
+<svg id="z20064" class="acjk" version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>
+<![CDATA[
+@keyframes zk {
+	to {
+		stroke-dashoffset:0;
+	}
+}
+svg.acjk path[clip-path] {
+	--t:0.8s;
+	animation:zk var(--t) linear forwards var(--d);
+	stroke-dasharray:3337;
+	stroke-dashoffset:3339;
+	stroke-width:128;
+	stroke-linecap:round;
+	fill:none;
+	stroke:#000;
+}
+svg.acjk path[id] {fill:#ccc;}
+]]>
+</style>
+<path id="z20064d1" d="M667 185Q686 210 685 267Q682 445 663 559Q644 655 617 723Q604 751 591 757Q582 761 471 731Q440 722 438 727Q434 734 453 748Q519 797 556 842Q577 876 597 871Q651 856 698 717Q726 623 748 315Q752 234 775 208Q796 184 770 164Q688 109 648 122Q425 176 266 187Q256 186 254 194Q251 203 264 209Q315 234 352 223Q398 208 616 174Q653 170 667 185Z"/>
+<path id="z20064d2" d="M336 345Q363 367 391 394Q406 407 421 406Q431 405 437 392Q441 376 431 347Q425 328 394 314Q324 290 308 297Q304 301 305 314Q309 324 336 345Z"/>
+<path id="z20064d3" d="M213 607Q198 611 199 625Q200 641 213 648Q244 660 288 673Q301 674 313 660Q338 627 494 503Q516 487 530 468Q543 456 541 445Q534 441 519 446Q407 513 263 590Q245 600 213 607Z"/>
+<defs>
+	<clipPath id="z20064c1"><use xlink:href="#z20064d1"/></clipPath>
+	<clipPath id="z20064c2"><use xlink:href="#z20064d2"/></clipPath>
+	<clipPath id="z20064c3"><use xlink:href="#z20064d3"/></clipPath>
+</defs>
+<path style="--d:1s;" pathLength="3333" clip-path="url(#z20064c1)" d="M258 195L336 203L654 147L734 202L687 604L639 763L587 816L446 730"/>
+<path style="--d:2s;" pathLength="3333" clip-path="url(#z20064c2)" d="M311 303L400 357L425 401"/>
+<path style="--d:3s;" pathLength="3333" clip-path="url(#z20064c3)" d="M202 621L292 624L535 451"/>
+</svg>
