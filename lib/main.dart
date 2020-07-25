@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:KanjiMaru/data/character_parser.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
@@ -9,17 +10,34 @@ import 'package:flutter/material.dart';
 Map dictionary;
 Map graphics;
 
-enum StartupState { Busy, Success, Error }
 void main() {
-  runApp(StartUp());
+  runApp(MaterialApp(
+    routes: {
+      '/': (context) => HomePage(),
+      'lmao': (context) => LmaoPage(),
+    },
+  ));
 }
 
-class StartUp extends StatefulWidget {
+class LmaoPage extends StatelessWidget {
   @override
-  _StartUpState createState() => _StartUpState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Container(
+          child: Text('Lmao'),
+        ),
+      ),
+    );
+  }
 }
 
-class _StartUpState extends State<StartUp> {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   Future characters;
 
   @override
@@ -32,57 +50,49 @@ class _StartUpState extends State<StartUp> {
     return await loadCharacterData();
   }
 
+  void setCharacters(data) {
+    dictionary = data['dictionary'];
+    graphics = data['graphics'];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: FutureBuilder(
-          future: characters,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState != ConnectionState.done) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              return Center(
-                child: Container(
-                  child: MaterialButton(
-                    onPressed: () {
-                      dictionary = snapshot.data['dictionary'];
-                      graphics = snapshot.data['graphics'];
-                      //print(dictionary['一']);
-                      //print(graphics['一']);
-                      //TODO: Make route to the writing aspect or home page or something.
-                    },
-                    child: Text('Hello Press Me'),
-                  ),
-                ),
-              );
-            }
-          },
-        ),
+    return Scaffold(
+      body: FutureBuilder(
+        future: characters,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            //Callback Function
+            setCharacters(snapshot.data);
+
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.popAndPushNamed(context, 'lmao');
+            });
+            return Container();
+          }
+        },
       ),
     );
   }
 }
 
-//TODO: Implement routes
 //TODO: Implement bottom navbar
-
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(home: HomePage2());
   }
 }
 
-
-
-class HomePage extends StatefulWidget {
+class HomePage2 extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePage2State createState() => _HomePage2State();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _HomePage2State extends State<HomePage2> with TickerProviderStateMixin {
   PageController _pageController;
   int _selectedIndex = 0;
 
