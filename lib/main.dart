@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'dart:async';
 import 'package:KanjiMaru/data/character_parser.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +6,67 @@ import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
 
-var dictionary;
-var graphics;
+Map dictionary;
+Map graphics;
 
+enum StartupState { Busy, Success, Error }
 void main() {
-  runApp(App());
+  runApp(StartUp());
 }
 
-void printDic(dynamic dic) {}
+class StartUp extends StatefulWidget {
+  @override
+  _StartUpState createState() => _StartUpState();
+}
+
+class _StartUpState extends State<StartUp> {
+  Future characters;
+
+  @override
+  void initState() {
+    characters = _getCharacters();
+    super.initState();
+  }
+
+  _getCharacters() async {
+    return await loadCharacterData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: FutureBuilder(
+          future: characters,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return Center(
+                child: Container(
+                  child: MaterialButton(
+                    onPressed: () {
+                      dictionary = snapshot.data['dictionary'];
+                      graphics = snapshot.data['graphics'];
+                      //print(dictionary['一']);
+                      //print(graphics['一']);
+                      //TODO: Make route to the writing aspect or home page or something.
+                    },
+                    child: Text('Hello Press Me'),
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+//TODO: Implement routes
+//TODO: Implement bottom navbar
+
 
 class App extends StatelessWidget {
   @override
@@ -22,6 +74,8 @@ class App extends StatelessWidget {
     return MaterialApp(home: HomePage());
   }
 }
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -195,7 +249,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     MaterialButton(
                       onPressed: () async {
                         var dic = await loadDictionary();
-                        print(dic[2997]);
+                        print(dic['一']);
                       },
                       child: Text('Hello'),
                     )
