@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "19455437556",
+    "firebase_url": "https://kanjimaru-9db3a.firebaseio.com",
+    "project_id": "kanjimaru-9db3a",
+    "storage_bucket": "kanjimaru-9db3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19455437556:android:0b435a4ffb3d10e9b9cca1",
+        "android_client_info": {
+          "package_name": "com.jp.KanjiMaru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19455437556-ockfuv4jcsi41pvm5t8ldcthsaort7ku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSNSmd1oEiaQye_dYEK46BAV5YuPXij5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19455437556-ockfuv4jcsi41pvm5t8ldcthsaort7ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

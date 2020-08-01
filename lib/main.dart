@@ -1,6 +1,7 @@
-import 'dart:async';
 import 'package:KanjiMaru/data/character_parser.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:KanjiMaru/data/user_data.dart';
+import 'package:KanjiMaru/pages/HomePage/HomePage.dart';
+import 'package:KanjiMaru/pages/LoadingPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
@@ -12,80 +13,22 @@ Map graphics;
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     routes: {
-      '/': (context) => HomePage(),
-      'lmao': (context) => LmaoPage(),
+      '/': (context) =>
+          LoadingPage(characterCallback: setCharacters),
+      'lmao': (context) => HomePage(),
+      'test': (context) => HomePage2(),
     },
+    theme: ThemeData.dark(),
   ));
 }
 
-class LmaoPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          child: Text('Lmao'),
-        ),
-      ),
-    );
-  }
+void setCharacters(data) {
+  dictionary = data['dictionary'];
+  graphics = data['graphics'];
 }
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  Future characters;
-
-  @override
-  void initState() {
-    characters = _getCharacters();
-    super.initState();
-  }
-
-  _getCharacters() async {
-    return await loadCharacterData();
-  }
-
-  void setCharacters(data) {
-    dictionary = data['dictionary'];
-    graphics = data['graphics'];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: characters,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            //Callback Function
-            setCharacters(snapshot.data);
-
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.popAndPushNamed(context, 'lmao');
-            });
-            return Container();
-          }
-        },
-      ),
-    );
-  }
-}
-
-//TODO: Implement bottom navbar
-
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage2());
-  }
-}
 
 class HomePage2 extends StatefulWidget {
   @override
