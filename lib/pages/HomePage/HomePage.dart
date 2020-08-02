@@ -3,6 +3,7 @@ import 'package:KanjiMaru/pages/HomePage/study.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 //Future<DocumentSnapshot> reference =
 //Firestore.instance.collection('users').document('ExitTrance').get();
@@ -25,6 +26,8 @@ class _HomePageState extends State<HomePage> {
   ];
 
   static Widget home(BuildContext context) {
+    User user = Provider.of<User>(context);
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   Center(child: Text('Kanji')),
-                  Center(child: Text('20')),
+                  Center(child: Text(user?.stats?.vocabLearned.toString()) ?? 0),
                 ],
               ),
             ),
@@ -66,7 +69,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   Center(child: Text('Vocab')),
-                  Center(child: Text('20')),
+                  Center(child: Text(user?.stats?.kanjiLearned.toString() ?? 0)),
                 ],
               ),
             ),

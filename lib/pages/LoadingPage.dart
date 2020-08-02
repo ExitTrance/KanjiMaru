@@ -1,6 +1,4 @@
 import 'package:KanjiMaru/data/character_parser.dart';
-import 'package:KanjiMaru/data/user_data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 

@@ -1,6 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+class User {
+  User({this.reviewSet, this.stats});
 
-DocumentSnapshot fsChars;
+  List<ReviewItem> reviewSet;
+  Statistics stats;
+}
 
-var review_set;
-var stats;
+class ReviewItem {
+  ReviewItem({this.char, this.desc});
+
+  String char;
+  String desc;
+}
+
+class Statistics {
+  Statistics({this.kanjiLearned, this.reviews, this.vocabLearned});
+
+  int kanjiLearned;
+  int reviews;
+  int vocabLearned;
+}

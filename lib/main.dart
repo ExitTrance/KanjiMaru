@@ -1,3 +1,4 @@
+import 'package:KanjiMaru/services/database.dart';
 import 'package:KanjiMaru/data/character_parser.dart';
 import 'package:KanjiMaru/data/user_data.dart';
 import 'package:KanjiMaru/pages/HomePage/HomePage.dart';
@@ -12,23 +13,35 @@ Map dictionary;
 Map graphics;
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    routes: {
-      '/': (context) =>
-          LoadingPage(characterCallback: setCharacters),
-      'lmao': (context) => HomePage(),
-      'test': (context) => HomePage2(),
-    },
-    theme: ThemeData.dark(),
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        StreamProvider<User>.value(
+          value: Database().getUserData,
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => LoadingPage(characterCallback: setCharacters),
+          'lmao': (context) => HomePage(),
+          'test': (context) => HomePage2(),
+        },
+        theme: ThemeData.dark(),
+      ),
+    );
+  }
 }
 
 void setCharacters(data) {
   dictionary = data['dictionary'];
   graphics = data['graphics'];
 }
-
 
 class HomePage2 extends StatefulWidget {
   @override
