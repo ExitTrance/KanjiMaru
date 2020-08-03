@@ -7,18 +7,21 @@ class Database {
   Stream<User> get getUserData {
     return _firestore
         .collection('users')
-        .document('ExitTrance')
+        .document('ExitTrance') //TODO: Check user here and add login logic to this as well. 
         .snapshots()
         .map(
           (DocumentSnapshot ds) => User(
-            reviewSet: ds['review_set'].forEach((k, v) => [].add(ReviewItem(
+            reviewSet: ds['reviewSet'].forEach((k, v) => [].add(ReviewItem(
                   char: v['char'] ?? '',
                   desc: v['desc'] ?? '',
                 ))),
             stats: Statistics(
-              kanjiLearned: ds['stats']['kanji_learned'] ?? 0,
-              reviews: ds['stats']['reviews'] ?? 0,
-              vocabLearned: ds['stats']['vocab_learned'] ?? 0,
+              kanjiLearned: ds['stats']['kanjiLearned'] ?? 0,
+              reviews: ds['stats']['reviews'] ?? 1,
+              vocabLearned: ds['stats']['vocabLearned'] ?? 0,
+            ),
+            settings: Settings(
+              reviewGoal: ds['settings']['reviewGoal'] ?? 100,
             ),
           ),
         );
