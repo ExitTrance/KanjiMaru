@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   static Widget home(BuildContext context) {
     User user = Provider.of<User>(context);
-
+    print(user.stats.kanjiLearned);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,15 +89,15 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'study');
-              /* Firestore.instance
+              /* Navigator.pushNamed(context, 'study'); */
+              Firestore.instance
                   .collection('users')
                   .document('ExitTrance')
                   .updateData({
                 'settings': {
                   'reviewGoal': 500,
                 }
-              }); */
+              });
               /*  Firestore.instance
                   .collection('users')
                   .document('ExitTrance')

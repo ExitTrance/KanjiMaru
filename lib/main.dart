@@ -19,14 +19,16 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final User error = User(
+      reviewSet: [ReviewItem()], stats: Statistics(), settings: Settings(reviewGoal: 100));
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         StreamProvider<User>.value(
           value: Database().getUserData,
-          initialData: User(reviewSet: [ReviewItem()], stats: Statistics(), settings: Settings()),
-          catchError: (_, err) => User(reviewSet: [ReviewItem()], stats: Statistics(), settings: Settings()),
+          initialData: error,
+          catchError: (_, err) => error,
         )
       ],
       child: MaterialApp(
