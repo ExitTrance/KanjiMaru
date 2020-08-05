@@ -16,9 +16,9 @@ class Database {
                   desc: v['desc'] ?? '',
                 ))),
             stats: Statistics(
-              kanjiLearned: ds['stats']['kanjiLearned'] ?? 1,
+              kanjiLearned: ds['stats']['kanjiLearned'] ?? 0,
               reviews: ds['stats']['reviews'] ?? 1,
-              vocabLearned: ds['stats']['vocabLearned'] ?? 1,
+              vocabLearned: ds['stats']['vocabLearned'] ?? 0,
             ),
             settings: Settings(
               reviewGoal: ds['settings']['reviewGoal'] ?? 100,
