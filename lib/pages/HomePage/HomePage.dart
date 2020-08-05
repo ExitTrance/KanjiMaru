@@ -1,15 +1,12 @@
 import 'package:KanjiMaru/data/user_data.dart';
 import 'package:KanjiMaru/pages/HomePage/study.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 //Future<DocumentSnapshot> reference =
 //Firestore.instance.collection('users').document('ExitTrance').get();
-
-DocumentReference reference =
-    Firestore.instance.collection('users').document('ExitTrance');
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,7 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   static Widget home(BuildContext context) {
     User user = Provider.of<User>(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -44,13 +41,20 @@ class _HomePageState extends State<HomePage> {
         CircularPercentIndicator(
           radius: 150.0,
           lineWidth: 10.0,
-          percent: .7,
-          center: Text('70/100 \n Reviews'),
+          percent: ((user.stats.reviews) / (user.settings.reviewGoal))
+              .clamp(.0, 1.0),
+          center: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('${user.stats.reviews}/${user.settings.reviewGoal}'),
+              Text('Reviews'),
+            ],
+          ),
           progressColor: Theme.of(context).accentColor,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 36.0),
-          child: Text('Learned:'),
+          child: Text('Learned'),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,8 +63,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Center(child: Text('Kanji')),
-                  Center(child: Text(user?.stats?.vocabLearned.toString()) ?? 0),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Center(child: Text('Kanji')),
+                  ),
+                  Center(child: Text(user.stats.kanjiLearned.toString())),
                 ],
               ),
             ),
@@ -68,8 +75,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Center(child: Text('Vocab')),
-                  Center(child: Text(user?.stats?.kanjiLearned.toString() ?? 0)),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Center(child: Text('Vocab')),
+                  ),
+                  Center(child: Text(user.stats.vocabLearned.toString())),
                 ],
               ),
             ),
@@ -78,7 +88,51 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'study');
+              /* Firestore.instance
+                  .collection('users')
+                  .document('ExitTrance')
+                  .updateData({
+                'settings': {
+                  'reviewGoal': 500,
+                }
+              }); */
+              /*  Firestore.instance
+                  .collection('users')
+                  .document('ExitTrance')
+                  .setData({
+                'settings': {
+                  'reviewGoal': 100,
+                },
+                'reviewSet': {
+                  '丸': {
+                    'char': '丸',
+                    'desc': 'maru lmao',
+                  },
+                  '他': {
+                    'char': '他',
+                    'desc': 'something',
+                  },
+                },
+                'stats': {
+                  'kanjiLearned': 0,
+                  'reviews': 0,
+                  'vocabLearned': 0,
+                }
+              }); */
+
+              /* Firestore.instance.runTransaction((transaction) async => transaction
+                      .update(
+                          Firestore.instance
+                              .collection('users')
+                              .document('ExitTrance'),
+                          {
+                        'settings': {
+                          'review_goal': 200,
+                        }
+                      })); */
+            },
             child: Text(
               'Quick Study',
             ),
