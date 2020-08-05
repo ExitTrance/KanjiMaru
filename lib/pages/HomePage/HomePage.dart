@@ -89,15 +89,13 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'study');
-              /* Firestore.instance
+              /* Navigator.pushNamed(context, 'study'); */
+              Firestore.instance
                   .collection('users')
                   .document('ExitTrance')
                   .updateData({
-                'settings': {
-                  'reviewGoal': 500,
-                }
-              }); */
+                'settings.reviewGoal': FieldValue.increment(1),
+              });
               /*  Firestore.instance
                   .collection('users')
                   .document('ExitTrance')

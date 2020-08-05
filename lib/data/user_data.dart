@@ -6,6 +6,7 @@ class User {
   Settings settings;
 }
 
+
 class ReviewItem {
   ReviewItem({this.char = '', this.desc = ''});
 
