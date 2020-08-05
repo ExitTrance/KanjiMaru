@@ -9,8 +9,6 @@ import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/StudyPage.dart';
-
 Map dictionary;
 Map graphics;
 
@@ -25,8 +23,6 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<User>.value(
           value: Database().getUserData,
-          initialData: User(reviewSet: [ReviewItem()], stats: Statistics(), settings: Settings()),
-          catchError: (_, err) => User(reviewSet: [ReviewItem()], stats: Statistics(), settings: Settings()),
         )
       ],
       child: MaterialApp(
@@ -34,7 +30,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => LoadingPage(characterCallback: setCharacters),
           'lmao': (context) => HomePage(),
-          'study': (context) => StudyPage(),
           'test': (context) => HomePage2(),
         },
         theme: ThemeData.dark(),
