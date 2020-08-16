@@ -1,12 +1,8 @@
 import 'package:KanjiMaru/data/user_data.dart';
 import 'package:KanjiMaru/pages/HomePage/study.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-
-//Future<DocumentSnapshot> reference =
-//Firestore.instance.collection('users').document('ExitTrance').get();
 
 class HomePage extends StatefulWidget {
   @override
@@ -89,13 +85,13 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {
-              /* Navigator.pushNamed(context, 'study'); */
-              Firestore.instance
+              Navigator.pushNamed(context, 'study'); 
+              /* Firestore.instance
                   .collection('users')
                   .document('ExitTrance')
                   .updateData({
                 'settings.reviewGoal': FieldValue.increment(1),
-              });
+              }); */
               /*  Firestore.instance
                   .collection('users')
                   .document('ExitTrance')

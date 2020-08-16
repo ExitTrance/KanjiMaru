@@ -1,6 +1,14 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
-class StudyPage extends StatelessWidget {
+class StudyPage extends StatefulWidget {
+  @override
+  _StudyPageState createState() => _StudyPageState();
+}
+
+class _StudyPageState extends State<StudyPage> {
+  bool flipped = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,10 +17,69 @@ class StudyPage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('hi'),
-            Text('hi'),
-            Card(),
+            FlipCard(
+              onFlip: () {
+                setState(() {
+                  flipped = !flipped;
+                });
+              },
+              direction: FlipDirection.HORIZONTAL,
+              front: Container(
+                height: 400,
+                width: 250,
+                color: Theme.of(context).primaryColor,
+                child: Center(
+                    child: Text(
+                  '丸い',
+                  style: TextStyle(
+                      fontSize: 25, color: Theme.of(context).accentColor),
+                )),
+              ),
+              back: Container(
+                height: 400,
+                width: 250,
+                color: Theme.of(context).primaryColor,
+                child: Center(
+                    child: Text(
+                  'Round',
+                  style: TextStyle(
+                      fontSize: 25, color: Theme.of(context).accentColor),
+                )),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: !flipped
+                  ? Container()
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        MaterialButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Bad',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        MaterialButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Meh',
+                            style: TextStyle(color: Colors.yellow),
+                          ),
+                        ),
+                        MaterialButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Good',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
           ],
         ),
       ),
