@@ -1,4 +1,4 @@
-import 'package:KanjiMaru/data/user_data.dart';
+import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {

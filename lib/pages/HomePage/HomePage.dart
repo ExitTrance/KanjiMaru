@@ -1,4 +1,4 @@
-import 'package:KanjiMaru/data/user_data.dart';
+import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/pages/HomePage/study.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   static Widget home(BuildContext context) {
     User user = Provider.of<User>(context);
+    Map map = Provider.of<Map>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'study'); 
+              Navigator.pushNamed(context, 'study');
               /* Firestore.instance
                   .collection('users')
                   .document('ExitTrance')
@@ -129,6 +130,18 @@ class _HomePageState extends State<HomePage> {
             },
             child: Text(
               'Quick Study',
+            ),
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: MaterialButton(
+            onPressed: () {
+              print(map.toString());
+            },
+            child: Text(
+              'Test',
             ),
             color: Theme.of(context).primaryColor,
           ),

@@ -1,6 +1,6 @@
 import 'package:KanjiMaru/services/database.dart';
-import 'package:KanjiMaru/data/character_parser.dart';
-import 'package:KanjiMaru/data/user_data.dart';
+import 'package:KanjiMaru/services/character_parser.dart';
+import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/pages/HomePage/HomePage.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:KanjiMaru/data/list_parser.dart';
 import 'pages/StudyPage.dart';
 
 Map dictionary;
@@ -33,7 +33,12 @@ class MyApp extends StatelessWidget {
               reviewSet: [ReviewItem()],
               stats: Statistics(),
               settings: Settings()),
-        )
+        ),
+        FutureProvider<Map>.value(
+          value: parseList(),
+          initialData: {},
+          catchError: (_, error) => {},
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
