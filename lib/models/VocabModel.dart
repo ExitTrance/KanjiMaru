@@ -1,5 +1,17 @@
-class Vocab {}
+class Vocab {
+  Vocab({this.vocabListName = "", this.vocab = const []});
+  String vocabListName;
+  List vocab;
 
+  factory Vocab.fromJson(Map<String, dynamic> map) {
+    return Vocab(
+      vocabListName: map['name'],
+      vocab: map['notes'].map((note) => VocabItem.fromMap(note)).toList(),
+    );
+  }
+}
+
+///something
 class VocabItem {
   VocabItem({
     this.vocabType,
@@ -13,6 +25,7 @@ class VocabItem {
 
   // Example Vocab Item
   //
+
   // vocabType:     "definition"
   // reading:       "今"
   // definition:    "now"
@@ -21,10 +34,10 @@ class VocabItem {
   // section:       "4"
   // section:       ""
 
-
   //Can either be definition(JP -> ENG) or recall (ENG -> JP)
   String vocabType;
 
+  ///reading
   String reading;
 
   String definition;
@@ -42,4 +55,30 @@ class VocabItem {
 
   //If it's a noun/verb or just not specified
   String wordType;
+
+  factory VocabItem.fromMap(Map<String, dynamic> data) {
+    return VocabItem(
+      vocabType: data[''],
+      reading: data['fields'][0],
+      definition: data['fields'][1],
+      furigana: data['fields'][2],
+      containsKanji: data['fields'][3],
+      section: data['tags'][0],
+      wordType: data[''],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      reading: {
+        'vocabType': vocabType,
+        'reading': reading,
+        'definition': definition,
+        'furigana': furigana,
+        'containsKanji': containsKanji,
+        'section': section,
+        'wordType': wordType,
+      }
+    };
+  }
 }

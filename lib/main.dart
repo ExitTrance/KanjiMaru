@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
-import 'package:KanjiMaru/data/list_parser.dart';
+import 'package:KanjiMaru/services/list_parser.dart';
+import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
 
 Map dictionary;
@@ -34,10 +35,10 @@ class MyApp extends StatelessWidget {
               stats: Statistics(),
               settings: Settings()),
         ),
-        FutureProvider<Map>.value(
-          value: parseList(),
-          initialData: {},
-          catchError: (_, error) => {},
+        FutureProvider<Vocab>.value(
+          value: parseListTest(),
+          initialData: Vocab(),
+          catchError: (_, error) => Vocab(),
         ),
       ],
       child: MaterialApp(

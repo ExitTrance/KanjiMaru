@@ -1,4 +1,5 @@
 import 'package:KanjiMaru/models/UserModel.dart';
+import 'package:KanjiMaru/models/VocabModel.dart';
 import 'package:KanjiMaru/pages/HomePage/study.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   static Widget home(BuildContext context) {
     User user = Provider.of<User>(context);
-    Map map = Provider.of<Map>(context);
+    Vocab vocab = Provider.of<Vocab>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,7 +139,8 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16.0),
           child: MaterialButton(
             onPressed: () {
-              print(map.toString());
+              vocab.vocab.forEach((i) => print(i.reading));
+              print(vocab.vocab[0].reading);
             },
             child: Text(
               'Test',
