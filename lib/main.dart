@@ -1,7 +1,7 @@
 import 'package:KanjiMaru/services/database.dart';
 import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
-import 'package:KanjiMaru/pages/HomePage/HomePage.dart';
+import 'package:KanjiMaru/pages/HomePage/Overview.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:KanjiMaru/services/list_parser.dart';
 import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
+import 'package:flutter/services.dart';
 
 Map dictionary;
 Map graphics;
@@ -22,6 +23,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MultiProvider(
       providers: [
         StreamProvider<User>.value(
@@ -45,11 +48,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => LoadingPage(characterCallback: setCharacters),
-          'lmao': (context) => HomePage(),
+          'lmao': (context) => Overview(),
           'study': (context) => StudyPage(),
           'test': (context) => HomePage2(),
         },
-        theme: ThemeData.dark(),
+        theme: ThemeData.dark().copyWith(
+          //primaryColorDark: Color(0xFF000000),
+
+          scaffoldBackgroundColor: Color(0xFF131522),
+        ),
       ),
     );
   }
