@@ -1,7 +1,7 @@
 import 'package:KanjiMaru/services/database.dart';
 import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
-import 'package:KanjiMaru/pages/HomePage/Overview.dart';
+import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -48,13 +48,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => LoadingPage(characterCallback: setCharacters),
-          'lmao': (context) => Overview(),
+          'lmao': (context) => Home(),
           'study': (context) => StudyPage(),
           'test': (context) => HomePage2(),
         },
         theme: ThemeData.dark().copyWith(
           //primaryColorDark: Color(0xFF000000),
-
+          accentColor: Color(0xFFEE892C),
           scaffoldBackgroundColor: Color(0xFF131522),
         ),
       ),
