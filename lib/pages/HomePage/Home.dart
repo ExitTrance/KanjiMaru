@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
 
     double textSizeNav = 12.0;
     return Padding(
-      padding: const EdgeInsets.only(top: 45.0, left: 9, right: 9),
+      padding: const EdgeInsets.only(top: 32.0, left: 16, right: 16, bottom: 8),
       child: Overview(textSizeNav: textSizeNav, user: user),
     );
   }
@@ -73,4 +73,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
