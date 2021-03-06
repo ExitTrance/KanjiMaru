@@ -2,7 +2,6 @@ import 'package:KanjiMaru/pages/HomePage/Overview_Components/OverviewCard.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Overview extends StatelessWidget {
   const Overview({
