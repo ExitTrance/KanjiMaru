@@ -39,7 +39,7 @@ class OverviewCard extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 10.0, left: 24, right: 16, bottom: 4.0),
+                  top: 6.0, left: 24, right: 16, bottom: 4.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

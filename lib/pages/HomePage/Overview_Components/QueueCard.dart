@@ -38,8 +38,8 @@ class QueueCard extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: SizedBox(
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
                 child: SvgPicture.asset(svgPath,
                     semanticsLabel: '$titleText $svgSemanticLabel'),
               ),
@@ -55,7 +55,7 @@ class QueueCard extends StatelessWidget {
                   style: TextStyle(fontSize: 10),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: const EdgeInsets.only(top: 8.0),
                   child: RichText(
                     text: TextSpan(children: [
                       TextSpan(

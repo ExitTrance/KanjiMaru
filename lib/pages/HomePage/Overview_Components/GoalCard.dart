@@ -48,23 +48,26 @@ class GoalCard extends StatelessWidget {
       cardTheme: cardTheme,
       titleText: titleText,
       subText: RichText(
-        text: TextSpan(children: [
-          TextSpan(text: 'You are currently on a '),
-          TextSpan(
-            text: '$currentStreak',
-            style: TextStyle(
-              color: cardTheme,
+        text: TextSpan(
+          children: [
+            TextSpan(text: 'You are currently on a '),
+            TextSpan(
+              text: '$currentStreak',
+              style: TextStyle(
+                color: cardTheme,
+              ),
             ),
-          ),
-          TextSpan(text: ' day streak!'),
-        ]),
+            TextSpan(text: ' day streak!'),
+          ],
+          style: TextStyle(fontSize: 10),
+        ),
       ),
       buttonText: buttonText,
       buttonFunction: buttonFunction,
       midContent: Row(
         children: [
           Expanded(
-            flex: 1,
+            flex: 6,
             child: Column(
               children: [
                 CircularPercentIndicator(
@@ -99,8 +102,11 @@ class GoalCard extends StatelessWidget {
               ],
             ),
           ),
+          Spacer(
+            flex: 2,
+          ),
           Expanded(
-            flex: 1,
+            flex: 6,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
