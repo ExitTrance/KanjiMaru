@@ -9,9 +9,13 @@ Inspired by both Anki and WaniKani, tools which I still use at the moment on my 
 Although the idea is to have this app be open source, if I ever decide to publish it, I might make this repo private, as I am not sure on the licensing.
 
 ## UI
-`Current Mock 'Overview Screen.`
+`Current Mock 'Overview Screen' in Figma`
 
-<img src="screenshots/Screenshot_20210211-233737.jpg" width="250" height="450" /> 
+<img src="screenshots/Screenshot_2021-03-06-184714.png" width="250" height="450" /> 
+
+`Current 'Overview Screen' in Flutter`
+
+<img src="screenshots/CurrentProgressOverview.png" width="250" height="450" /> 
 
 ## Planned Features
 Barebone features that this project will have to satisfy for me.
