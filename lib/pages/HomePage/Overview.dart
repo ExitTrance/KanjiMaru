@@ -1,6 +1,6 @@
-import 'package:KanjiMaru/pages/HomePage/Overview_Components/OverviewCard.dart';
+import 'package:KanjiMaru/pages/HomePage/Overview_Components/GoalCard.dart';
+import 'package:KanjiMaru/pages/HomePage/Overview_Components/QueueCard.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
 
 class Overview extends StatelessWidget {
@@ -26,9 +26,9 @@ class Overview extends StatelessWidget {
                   Expanded(
                     flex: 4,
                     child: Text(
-                      'こんにちは！',
+                      'Home',
                       style: TextStyle(fontSize: 25),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                   Expanded(
@@ -49,181 +49,67 @@ class Overview extends StatelessWidget {
           ],
         ),
 
-        //Menu Items / Remaining Items Queue
-        /* TabBar(
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Align(
+            child: Text(
+              'おはよう！',
+              style: TextStyle(fontSize: 24),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+        ),
+
+        // Top Menu
+        TabBar(
           indicatorPadding: EdgeInsets.only(top: 0),
           labelPadding: EdgeInsets.symmetric(horizontal: 2),
           indicatorColor: Color(0xFFEE892C),
           labelStyle: TextStyle(fontSize: textSizeNav),
           tabs: [
-            Tab(text: 'Overview', icon: Icon(Icons.favorite, size: 12)),
-            Tab(text: 'Decks', icon: Icon(Icons.favorite, size: 12)),
-            Tab(text: 'Calendar', icon: Icon(Icons.favorite, size: 12)),
-            Tab(text: 'Statistics', icon: Icon(Icons.favorite, size: 12)),
-          ],
-        ), */
-
-        Row(
-          children: [
-            Chip(label: Text('Home')),
-            Chip(label: Text('Statistics')),
+            Tab(text: 'Overview'),
+            Tab(text: 'Decks'),
+            Tab(text: 'Calendar'),
+            Tab(text: 'Statistics'),
           ],
         ),
-        //Daily Study Goal Box
-        OverviewCard(
+
+        //Daily Study Goal Card
+        GoalCard(
+          cardTheme: Color(0xFF00C2FF),
           titleText: 'Daily Study Goal',
-          subText: 'You are currently on a 5 day streak!',
+          currentStreak: 5,
+          lessonsRemaining: 50,
+          reviewsRemaining: 10,
           buttonText: 'Quick Study',
-          buttonAxisAlignment: MainAxisAlignment.end,
           buttonFunction: () {},
-          midContent: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  CircularPercentIndicator(
-                    radius: 80.0,
-                    lineWidth: 6.0,
-                    percent: 0.2.clamp(.0, 1.0),
-                    center: CircularPercentIndicator(
-                      radius: 60.0,
-                      lineWidth: 6.0,
-                      percent: 0.5.clamp(.0, 1.0),
-                      center: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.favorite),
-                        ],
-                      ),
-                      progressColor: Color(0xFF9925EA),
-                      backgroundColor: Color(0xFF363B49),
-                      backgroundWidth: 3,
-                      circularStrokeCap: CircularStrokeCap.round,
-                    ),
-                    progressColor: Color(0xFF2DD752),
-                    backgroundColor: Color(0xFF363B49),
-                    backgroundWidth: 3,
-                    circularStrokeCap: CircularStrokeCap.round,
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 42.0),
-                child: Column(
-                  children: [
-                    Text(
-                      ' Reviews',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      ' Reviews',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          svgPath: 'assets/icons/goal-svgrepo-com.svg',
+          svgSize: 50.0,
+          progressRadiusOuter: 80.0,
+          progressRadiusInner: 60.0,
+          lessonColor: Color(0xFF2DD752),
+          reviewColor: Color(0xFF9925EA),
         ),
 
-        //Vocab and Kanji Box
-        Expanded(
-          child: Row(
-            children: [
-              OverviewCard(
-                cardTheme: Color(0xFF2DD752),
-                titleText: 'Learn',
-                subText: 'Learn new Items',
-                midContent: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      size: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Studied',
-                          style: TextStyle(fontSize: 10),
-                        ),
-                        Text(
-                          '${user.stats.vocabLearned}',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xFF9925EA),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                buttonText: 'Go Learn',
-                buttonAxisAlignment: MainAxisAlignment.center,
-                buttonFunction: () {},
-              ),
-              OverviewCard(
-                cardTheme: Color(0xFF9925EA),
-                titleText: 'Review',
-                subText: 'Review old Items',
-                midContent: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      size: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Studied',
-                          style: TextStyle(fontSize: 10),
-                        ),
-                        Text(
-                          '${user.stats.kanjiLearned}',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xFFF222D1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                buttonText: 'Go Review',
-                buttonAxisAlignment: MainAxisAlignment.center,
-                buttonFunction: () {},
-              ),
-            ],
-          ),
+        // Learn Card
+        QueueCard(
+          cardTheme: Color(0xFF2DD752),
+          titleText: 'Learn',
+          contentText: 'Learn new words from your lists.',
+          inQueue: 10001,
+          buttonText: 'Go Learn',
+          svgPath: 'assets/icons/learn.svg',
+          buttonFunction: () {},
         ),
 
-        //Games Box
-        OverviewCard(
-          flex: 0,
-          cardTheme: Color(0xFFCC0A5B),
-          titleText: 'Games',
-          subText: '',
-          midContent: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(
-                Icons.favorite,
-                size: 50,
-              ),
-              Expanded(
-                child: Text(
-                  'Enjoy our wide variety of learning games, and compete against other players! Guaranteed to get you hooked!',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Color(0xFFFFFFFF),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          buttonText: 'Go to Games',
-          buttonAxisAlignment: MainAxisAlignment.end,
+        // Review Card
+        QueueCard(
+          cardTheme: Color(0xFF9925EA),
+          titleText: 'Review',
+          contentText: 'Review all the vocab you learned so far.',
+          inQueue: 900,
+          buttonText: 'Go Review',
+          svgPath: 'assets/icons/review.svg',
           buttonFunction: () {},
         ),
       ],

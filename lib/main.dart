@@ -3,20 +3,23 @@ import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
-import 'package:stroke_order_animator/strokeOrderAnimator.dart';
+//import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
+//import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
 import 'package:KanjiMaru/services/list_parser.dart';
 import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Map dictionary;
 Map graphics;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -32,11 +35,11 @@ class MyApp extends StatelessWidget {
           initialData: User(
               reviewSet: [ReviewItem()],
               stats: Statistics(),
-              settings: Settings()),
+              settings: UserSettings()),
           catchError: (_, err) => User(
               reviewSet: [ReviewItem()],
               stats: Statistics(),
-              settings: Settings()),
+              settings: UserSettings()),
         ),
         FutureProvider<Vocab>.value(
           value: parseListTest(),
@@ -50,13 +53,22 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoadingPage(characterCallback: setCharacters),
           'lmao': (context) => Home(),
           'study': (context) => StudyPage(),
-          'test': (context) => HomePage2(),
         },
-        theme: ThemeData.dark().copyWith(
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Color(0xFF000000),
+          accentColor: Color(0xFFEE892C),
+          scaffoldBackgroundColor: Color(0xFF131522),
+          fontFamily: 'OpenSans',
+        ),
+        /* theme: ThemeData.dark().copyWith(
           //primaryColorDark: Color(0xFF000000),
           accentColor: Color(0xFFEE892C),
           scaffoldBackgroundColor: Color(0xFF131522),
-        ),
+          textTheme: ThemeData.dark().textTheme.apply(
+                fontFamily: 'OpenSans',
+          ),
+        ), */
       ),
     );
   }
@@ -67,7 +79,7 @@ void setCharacters(data) {
   graphics = data['graphics'];
 }
 
-class HomePage2 extends StatefulWidget {
+/* class HomePage2 extends StatefulWidget {
   @override
   _HomePage2State createState() => _HomePage2State();
 }
@@ -252,4 +264,4 @@ class _HomePage2State extends State<HomePage2> with TickerProviderStateMixin {
       ),
     );
   }
-}
+} */
