@@ -2,12 +2,12 @@ import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
-  final Firestore _firestore = Firestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<User> get getUserData {
     return _firestore
         .collection('users')
-        .document(
+        .doc(
             'ExitTrance') //TODO: Check user here and add login logic to this as well.
         .snapshots()
         .map(
@@ -21,7 +21,7 @@ class Database {
               reviews: ds['stats']['reviews'] ?? 1,
               vocabLearned: ds['stats']['vocabLearned'] ?? 0,
             ),
-            settings: Settings(
+            settings: UserSettings(
               reviewGoal: ds['settings']['reviewGoal'] ?? 100,
             ),
           ),
