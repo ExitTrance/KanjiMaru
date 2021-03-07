@@ -3,9 +3,8 @@ class User {
 
   List<ReviewItem> reviewSet;
   Statistics stats;
-  Settings settings;
+  UserSettings settings;
 }
-
 
 class ReviewItem {
   ReviewItem({this.char = '', this.desc = ''});
@@ -22,8 +21,8 @@ class Statistics {
   int vocabLearned;
 }
 
-class Settings {
-  Settings({this.reviewGoal = 100});
+class UserSettings {
+  UserSettings({this.reviewGoal = 100});
 
   int reviewGoal;
 }
