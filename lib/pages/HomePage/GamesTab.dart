@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget study(BuildContext context) {
+Widget games(BuildContext context) {
   return Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(

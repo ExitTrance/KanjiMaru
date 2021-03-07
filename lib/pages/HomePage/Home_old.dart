@@ -1,6 +1,6 @@
-import 'package:KanjiMaru/models/UserModel.dart';
+/* import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/models/VocabModel.dart';
-import 'package:KanjiMaru/pages/HomePage/study.dart';
+import 'package:KanjiMaru/pages/HomePage/GamesTab.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -313,3 +313,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+ */

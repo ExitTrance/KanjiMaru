@@ -1,7 +1,9 @@
 import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/models/VocabModel.dart';
-import 'package:KanjiMaru/pages/HomePage/Overview.dart';
-import 'package:KanjiMaru/pages/HomePage/study.dart';
+import 'package:KanjiMaru/pages/HomePage/DecksTab.dart';
+import 'package:KanjiMaru/pages/HomePage/OverviewTab.dart';
+import 'package:KanjiMaru/pages/HomePage/GamesTab.dart';
+import 'package:KanjiMaru/pages/HomePage/StatisticsTab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,14 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _currentIndex = 0;
-
-  List bottomNavBarPages = [
-    {'page': home, 'title': Text('Home')},
-    {'page': study, 'title': Text('Study')},
-    {'page': settings, 'title': Text('Settings')},
-  ];
-
   static Widget home(BuildContext context) {
     User user = Provider.of<User>(context);
     Vocab vocab = Provider.of<Vocab>(context);
@@ -26,49 +20,89 @@ class _HomeState extends State<Home> {
     double textSizeNav = 12.0;
     return Padding(
       padding: const EdgeInsets.only(top: 32.0, left: 16, right: 16, bottom: 8),
-      child: Overview(textSizeNav: textSizeNav, user: user),
-    );
-  }
+      child: Column(
+        children: [
+          // Dashboard Text / Cup / Settings / Profile Picture
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Text(
+                        'Home',
+                        style: TextStyle(fontSize: 25),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Icon(Icons.favorite),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Icon(Icons.favorite),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Icon(Icons.favorite),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
 
-  static Widget settings(BuildContext context) {
-    return Container(
-      child: Center(child: Text('')),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              const Color(0xff0d1124),
-              const Color(0xff181921),
+          // Greeting Text
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Align(
+              child: Text(
+                'おはよう！',
+                style: TextStyle(fontSize: 24),
+              ),
+              alignment: Alignment.centerLeft,
+            ),
+          ),
+
+          // TabBar
+          TabBar(
+            indicatorPadding: EdgeInsets.only(top: 0),
+            labelPadding: EdgeInsets.symmetric(horizontal: 2),
+            indicatorColor: Color(0xFFEE892C),
+            labelStyle: TextStyle(fontSize: textSizeNav),
+            tabs: [
+              Tab(text: 'Overview'),
+              Tab(text: 'Decks'),
+              Tab(text: 'Games'),
+              Tab(text: 'Statistics'),
+            ],
+          ),
+
+          // Tab Bar Items
+          Expanded(
+            child: TabBarView(children: [
+              OverviewTab(user: user),
+              DecksTab(),
+              games(context),
+              StatisticsTab(),
             ]),
+          )
+        ],
       ),
     );
   }
 
-  PageController pageController = PageController(
-    initialPage: 0,
-    keepPage: true,
-  );
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+      initialIndex: 0,
       length: 4,
       child: Scaffold(
-        extendBody: true,
-        extendBodyBehindAppBar: true,
-        body: PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          children: <Widget>[
-            home(context),
-            study(context),
-            settings(context),
-          ],
-        ),
+        extendBody: false,
+        extendBodyBehindAppBar: false,
+        body: home(context),
       ),
     );
   }
