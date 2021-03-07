@@ -23,16 +23,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  stroke_order_animator: ^1.5.1
-  fluttertoast: ^4.0.1
+  #stroke_order_animator: ^1.5.1
+  fluttertoast: ^7.1.8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
-  cloud_firestore: ^0.13.7
+  cupertino_icons: ^1.0.2
+  firebase_core: ^1.0.0
+  cloud_firestore: ^1.0.0
   percent_indicator: ^2.1.5
   provider: ^4.3.1
   flip_card: ^0.4.4
+  flutter_svg: ^0.19.3
+  google_fonts: ^2.0.0 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -56,7 +59,10 @@ flutter:
   - assets/animCJK-master/dictionaryJa.json
   - assets/animCJK-master/graphicsJa.json
   - assets/vocab_list/Genki-1-2ndEdition.json
-  
+  - assets/icons/goal-svgrepo-com.svg
+  - assets/icons/learn.svg
+  - assets/icons/review.svg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -82,3 +88,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts: 
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Light.ttf
+          
+
+    - family: B612Mono
+      fonts:
+        - asset: assets/fonts/B612Mono-Regular.ttf
