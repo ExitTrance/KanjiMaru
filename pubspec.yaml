@@ -31,11 +31,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.0.0
   cloud_firestore: ^1.0.0
+  firebase_auth: ^1.0.0 
   percent_indicator: ^2.1.5
   provider: ^4.3.1
   flip_card: ^0.4.4
   flutter_svg: ^0.19.3
   google_fonts: ^2.0.0 
+  google_sign_in:
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,7 +65,7 @@ flutter:
   - assets/icons/goal-svgrepo-com.svg
   - assets/icons/learn.svg
   - assets/icons/review.svg
-
+  - assets/images/LoginPage/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -1,3 +1,4 @@
+import 'package:KanjiMaru/pages/ErrorPage.dart';
 import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -12,6 +13,7 @@ class LoadingPage extends StatefulWidget {
 
 class _LoadingPageState extends State<LoadingPage> {
   Future characters;
+
   @override
   void initState() {
     characters = _getCharacters();
@@ -28,13 +30,17 @@ class _LoadingPageState extends State<LoadingPage> {
       body: FutureBuilder(
         future: Future.wait([characters]),
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasError) {
+            return ErrorPage();
+          }
+
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(child: CircularProgressIndicator());
           } else {
             //Callback Function
             widget.characterCallback(snapshot.data[0]);
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.popAndPushNamed(context, 'lmao');
+              Navigator.pushNamed(context, 'landing');
             });
             return Container();
           }

@@ -1,8 +1,12 @@
+import 'package:KanjiMaru/pages/LoginPage/LandingPage.dart';
+import 'package:KanjiMaru/pages/LoginPage/LoginPage.dart';
+import 'package:KanjiMaru/services/auth.dart';
 import 'package:KanjiMaru/services/database.dart';
 import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
@@ -12,7 +16,6 @@ import 'package:KanjiMaru/services/list_parser.dart';
 import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 Map dictionary;
 Map graphics;
@@ -46,12 +49,17 @@ class MyApp extends StatelessWidget {
           initialData: Vocab(),
           catchError: (_, error) => Vocab(),
         ),
+        Provider<Auth>(create: (_) => Auth(FirebaseAuth.instance)),
+        StreamProvider(
+            create: (context) => context.read<Auth>().authStateChanges),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => LoadingPage(characterCallback: setCharacters),
-          'lmao': (context) => Home(),
+          'login': (context) => LoginPage(),
+          'landing': (context) => LandingPage(context),
+          'home': (context) => Home(),
           'study': (context) => StudyPage(),
         },
         theme: ThemeData(
@@ -61,14 +69,6 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xFF131522),
           fontFamily: 'OpenSans',
         ),
-        /* theme: ThemeData.dark().copyWith(
-          //primaryColorDark: Color(0xFF000000),
-          accentColor: Color(0xFFEE892C),
-          scaffoldBackgroundColor: Color(0xFF131522),
-          textTheme: ThemeData.dark().textTheme.apply(
-                fontFamily: 'OpenSans',
-          ),
-        ), */
       ),
     );
   }

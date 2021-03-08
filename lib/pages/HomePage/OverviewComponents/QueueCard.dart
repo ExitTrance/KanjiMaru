@@ -1,4 +1,4 @@
-import 'package:KanjiMaru/pages/HomePage/Overview_Components/OverviewCard.dart';
+import 'package:KanjiMaru/pages/HomePage/OverviewComponents/OverviewCard.dart';
 import 'package:KanjiMaru/services/pad_white_space.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

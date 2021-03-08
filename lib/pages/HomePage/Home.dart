@@ -4,6 +4,7 @@ import 'package:KanjiMaru/pages/HomePage/DecksTab.dart';
 import 'package:KanjiMaru/pages/HomePage/OverviewTab.dart';
 import 'package:KanjiMaru/pages/HomePage/GamesTab.dart';
 import 'package:KanjiMaru/pages/HomePage/StatisticsTab.dart';
+import 'package:KanjiMaru/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
 
     double textSizeNav = 12.0;
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0, left: 16, right: 16, bottom: 8),
+      padding: const EdgeInsets.only(top: 24.0, left: 16, right: 16, bottom: 8),
       child: Column(
         children: [
           // Dashboard Text / Cup / Settings / Profile Picture
@@ -38,7 +39,14 @@ class _HomeState extends State<Home> {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.favorite),
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0.0),
+                        icon: Icon(Icons.offline_pin),
+                        onPressed: () {
+                          context.read<Auth>().signOut();
+                          Navigator.pushNamed(context, 'landing');
+                        },
+                      ),
                     ),
                     Expanded(
                       flex: 1,
@@ -56,7 +64,7 @@ class _HomeState extends State<Home> {
 
           // Greeting Text
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 0.0),
             child: Align(
               child: Text(
                 'おはよう！',
