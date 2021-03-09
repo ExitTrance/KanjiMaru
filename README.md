@@ -1,12 +1,11 @@
 # KanjiMaru
 
-Flashcard and Kanji writing mobile app made in Flutter. After a somewhat long hiatus, I have decided to resume this Hobby Project of mine. 
+Flashcard and Japanese Characters writing mobile application made in Flutter. Still a work in progress! 
 
 As I have been frustrated by the fact that apps on the market do not provide a 'good' way to learn to write Japanese Characters, I have decided to create my own app.  
 
 Inspired by both Anki and WaniKani, tools which I still use at the moment on my Japanese learning journey. While they are great tools, I have been wanting to create something of my own for a while.
 
-Although the idea is to have this app be open source, if I ever decide to publish it, I might make this repo private, as I am not sure on the licensing.
 
 ## UI
 `Current Mock 'Overview Screen' in Figma`
@@ -18,15 +17,21 @@ Although the idea is to have this app be open source, if I ever decide to publis
 <img src="screenshots/CurrentProgressOverview.png" width="250" height="450" /> 
 
 ## Planned Features
-Barebone features that this project will have to satisfy for me.
+Barebone features that this project will have to satisfy for me. Subject to change. 
+UIs will change throughout time, so a tick does not mean it's the final version.
 
 - [ ] Front-end
-    - [ ] Overview Page
+    - [x] Login Page
+    - [x] Overview Page
     - [ ] Statistics Page 
     - [ ] Settings Page
     - [ ] Games Page
 - [ ] Firestore
     - [ ] Login System
+        - [x] Email/Password login
+        - [ ] Google Login
+        - [ ] Facebook Login
+        - [ ] Anonymous Login
     - [x] Firestore Integration
     - [x] Update UI on Firestore Changes
     - [x] Update Firestore on User Interaction/Background Processing
@@ -50,6 +55,7 @@ Barebone features that this project will have to satisfy for me.
 
 - [ ] Japanese Character Data
     - [x] Deserialize JP Data and Graphics into usable format 
+    - [x] Make Deserialized data available via providers
     - [ ] Hook up Backend to this Data
 
 - [ ] Learning Games
