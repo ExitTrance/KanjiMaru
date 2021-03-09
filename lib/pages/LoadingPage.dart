@@ -1,44 +1,27 @@
-import 'package:KanjiMaru/services/character_parser.dart';
+import 'package:KanjiMaru/providers/characterProviders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoadingPage extends StatefulWidget {
+class LoadingPage extends ConsumerWidget {
   LoadingPage({this.characterCallback});
   final Function characterCallback;
 
   @override
-  _LoadingPageState createState() => _LoadingPageState();
-}
+  Widget build(BuildContext context, ScopedReader watch) {
+    AsyncValue<Map> characterMap = watch(characters);
 
-class _LoadingPageState extends State<LoadingPage> {
-  Future characters;
-  @override
-  void initState() {
-    characters = _getCharacters();
-    super.initState();
-  }
-
-  _getCharacters() async {
-    return await loadCharacterData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: Future.wait([characters]),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            //Callback Function
-            widget.characterCallback(snapshot.data[0]);
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.popAndPushNamed(context, 'lmao');
-            });
-            return Container();
-          }
-        },
+      body: Container(
+        child: characterMap.when(
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (err, stack) => Text('Error: $err'),
+            data: (data) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.pushReplacementNamed(context, 'landing');
+              });
+              return Container();
+            }),
       ),
     );
   }

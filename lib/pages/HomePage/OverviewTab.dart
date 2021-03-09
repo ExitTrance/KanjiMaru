@@ -1,5 +1,5 @@
-import 'package:KanjiMaru/pages/HomePage/Overview_Components/GoalCard.dart';
-import 'package:KanjiMaru/pages/HomePage/Overview_Components/QueueCard.dart';
+import 'package:KanjiMaru/pages/HomePage/OverviewComponents/GoalCard.dart';
+import 'package:KanjiMaru/pages/HomePage/OverviewComponents/QueueCard.dart';
 import 'package:flutter/material.dart';
 import 'package:KanjiMaru/models/UserModel.dart';
 
@@ -8,7 +8,7 @@ class OverviewTab extends StatelessWidget {
     @required this.user,
   });
 
-  final User user;
+  final Stream<User> user;
 
   @override
   Widget build(BuildContext context) {

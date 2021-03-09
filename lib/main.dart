@@ -1,18 +1,14 @@
-import 'package:KanjiMaru/services/database.dart';
-import 'package:KanjiMaru/services/character_parser.dart';
-import 'package:KanjiMaru/models/UserModel.dart';
+import 'package:KanjiMaru/pages/LandingPage.dart';
+import 'package:KanjiMaru/pages/LoginPage/LoginPage.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
-import 'package:KanjiMaru/services/list_parser.dart';
-import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 Map dictionary;
 Map graphics;
@@ -20,7 +16,9 @@ Map graphics;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,55 +26,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MultiProvider(
-      providers: [
-        StreamProvider<User>.value(
-          value: Database().getUserData,
-          initialData: User(
-              reviewSet: [ReviewItem()],
-              stats: Statistics(),
-              settings: UserSettings()),
-          catchError: (_, err) => User(
-              reviewSet: [ReviewItem()],
-              stats: Statistics(),
-              settings: UserSettings()),
-        ),
-        FutureProvider<Vocab>.value(
-          value: parseListTest(),
-          initialData: Vocab(),
-          catchError: (_, error) => Vocab(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => LoadingPage(characterCallback: setCharacters),
-          'lmao': (context) => Home(),
-          'study': (context) => StudyPage(),
-        },
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Color(0xFF000000),
-          accentColor: Color(0xFFEE892C),
-          scaffoldBackgroundColor: Color(0xFF131522),
-          fontFamily: 'OpenSans',
-        ),
-        /* theme: ThemeData.dark().copyWith(
-          //primaryColorDark: Color(0xFF000000),
-          accentColor: Color(0xFFEE892C),
-          scaffoldBackgroundColor: Color(0xFF131522),
-          textTheme: ThemeData.dark().textTheme.apply(
-                fontFamily: 'OpenSans',
-          ),
-        ), */
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => LoadingPage(),
+        'landing': (context) => LandingPage(context),
+        'login': (context) => LoginPage(),
+        'home': (context) => Home(),
+        'study': (context) => StudyPage(),
+      },
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Color(0xFF000000),
+        accentColor: Color(0xFFEE892C),
+        scaffoldBackgroundColor: Color(0xFF131522),
+        fontFamily: 'OpenSans',
       ),
     );
   }
-}
-
-void setCharacters(data) {
-  dictionary = data['dictionary'];
-  graphics = data['graphics'];
 }
 
 /* class HomePage2 extends StatefulWidget {

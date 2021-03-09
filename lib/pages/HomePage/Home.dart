@@ -4,22 +4,19 @@ import 'package:KanjiMaru/pages/HomePage/DecksTab.dart';
 import 'package:KanjiMaru/pages/HomePage/OverviewTab.dart';
 import 'package:KanjiMaru/pages/HomePage/GamesTab.dart';
 import 'package:KanjiMaru/pages/HomePage/StatisticsTab.dart';
+import 'package:KanjiMaru/providers/authProviders.dart';
+import 'package:KanjiMaru/providers/characterProviders.dart';
+import 'package:KanjiMaru/providers/dbProviders.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  static Widget home(BuildContext context) {
-    User user = Provider.of<User>(context);
-    Vocab vocab = Provider.of<Vocab>(context);
+class Home extends ConsumerWidget {
+  static Widget home(BuildContext context, ScopedReader watch) {
+    Stream<User> user = watch(userStream.stream);
 
     double textSizeNav = 12.0;
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0, left: 16, right: 16, bottom: 8),
+      padding: const EdgeInsets.only(top: 24.0, left: 16, right: 16, bottom: 8),
       child: Column(
         children: [
           // Dashboard Text / Cup / Settings / Profile Picture
@@ -38,11 +35,25 @@ class _HomeState extends State<Home> {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.favorite),
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0.0),
+                        icon: Icon(Icons.offline_pin),
+                        onPressed: () {
+                          watch(auth).signOut();
+                          //Navigator.pushNamed(context, 'landing');
+                        },
+                      ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.favorite),
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0.0),
+                        icon: Icon(Icons.offline_pin),
+                        onPressed: () {
+                          print(watch(graphics));
+                          //print(watch(dictionaryProvider));
+                        },
+                      ),
                     ),
                     Expanded(
                       flex: 1,
@@ -56,7 +67,7 @@ class _HomeState extends State<Home> {
 
           // Greeting Text
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 0.0),
             child: Align(
               child: Text(
                 'おはよう！',
@@ -95,14 +106,12 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
       child: Scaffold(
-        extendBody: false,
-        extendBodyBehindAppBar: false,
-        body: home(context),
+        body: home(context, watch),
       ),
     );
   }
