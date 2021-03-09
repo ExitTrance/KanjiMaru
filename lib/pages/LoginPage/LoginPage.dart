@@ -1,11 +1,10 @@
 import 'package:KanjiMaru/pages/LoginPage/LoginComponents/SignInButton.dart';
 import 'package:KanjiMaru/pages/LoginPage/LoginComponents/SocialSignInButton.dart';
+import 'package:KanjiMaru/providers/authProviders.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:KanjiMaru/services/auth.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerWidget {
   /* Future<void> _signInAnonymously() async {
     try {
       await auth.signInAnonymously();
@@ -23,13 +22,13 @@ class LoginPage extends StatelessWidget {
   } */
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
-      body: _buildContent(context),
+      body: _buildContent(context, watch),
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, ScopedReader watch) {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -66,10 +65,10 @@ class LoginPage extends StatelessWidget {
             textColor: Colors.white,
             color: Colors.teal,
             onPressed: () {
-              context.read<Auth>().signIn(
-                    email: 'test@gmail.com',
-                    password: '123456789',
-                  );
+              watch(auth).signIn(
+                email: 'test@gmail.com',
+                password: '123456789',
+              );
             },
           ),
           SizedBox(height: 8.0),
@@ -82,9 +81,7 @@ class LoginPage extends StatelessWidget {
             text: 'Guest',
             textColor: Colors.black,
             color: Colors.lime[300],
-            onPressed: () {
-              context.read<Auth>().signOut();
-            },
+            onPressed: () {},
           ),
         ],
       ),

@@ -8,7 +8,7 @@ class OverviewTab extends StatelessWidget {
     @required this.user,
   });
 
-  final User user;
+  final Stream<User> user;
 
   @override
   Widget build(BuildContext context) {

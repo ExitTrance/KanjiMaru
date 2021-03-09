@@ -37,6 +37,7 @@ dependencies:
   flip_card: ^0.4.4
   flutter_svg: ^0.19.3
   google_fonts: ^2.0.0 
+  flutter_riverpod: ^0.13.1
   google_sign_in:
     
 dev_dependencies:

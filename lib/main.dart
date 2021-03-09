@@ -1,19 +1,12 @@
 import 'package:KanjiMaru/pages/LoginPage/LandingPage.dart';
 import 'package:KanjiMaru/pages/LoginPage/LoginPage.dart';
-import 'package:KanjiMaru/services/auth.dart';
-import 'package:KanjiMaru/services/database.dart';
-import 'package:KanjiMaru/services/character_parser.dart';
-import 'package:KanjiMaru/models/UserModel.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
-import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimator.dart';
 import 'package:flutter/material.dart';
-import 'package:KanjiMaru/services/list_parser.dart';
-import 'models/VocabModel.dart';
 import 'pages/StudyPage.dart';
 import 'package:flutter/services.dart';
 
@@ -31,34 +24,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MultiProvider(
-      providers: [
-        StreamProvider<User>.value(
-          value: Database().getUserData,
-          initialData: User(
-              reviewSet: [ReviewItem()],
-              stats: Statistics(),
-              settings: UserSettings()),
-          catchError: (_, err) => User(
-              reviewSet: [ReviewItem()],
-              stats: Statistics(),
-              settings: UserSettings()),
-        ),
-        FutureProvider<Vocab>.value(
-          value: parseListTest(),
-          initialData: Vocab(),
-          catchError: (_, error) => Vocab(),
-        ),
-        Provider<Auth>(create: (_) => Auth(FirebaseAuth.instance)),
-        StreamProvider(
-            create: (context) => context.read<Auth>().authStateChanges),
-      ],
+    return ProviderScope(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => LoadingPage(characterCallback: setCharacters),
-          'login': (context) => LoginPage(),
+          '/': (context) => LoadingPage(),
           'landing': (context) => LandingPage(context),
+          'login': (context) => LoginPage(),
           'home': (context) => Home(),
           'study': (context) => StudyPage(),
         },
@@ -72,11 +44,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-void setCharacters(data) {
-  dictionary = data['dictionary'];
-  graphics = data['graphics'];
 }
 
 /* class HomePage2 extends StatefulWidget {

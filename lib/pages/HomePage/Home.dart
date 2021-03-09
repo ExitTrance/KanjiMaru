@@ -4,19 +4,20 @@ import 'package:KanjiMaru/pages/HomePage/DecksTab.dart';
 import 'package:KanjiMaru/pages/HomePage/OverviewTab.dart';
 import 'package:KanjiMaru/pages/HomePage/GamesTab.dart';
 import 'package:KanjiMaru/pages/HomePage/StatisticsTab.dart';
+import 'package:KanjiMaru/providers/authProviders.dart';
+import 'package:KanjiMaru/providers/characterProviders.dart';
+import 'package:KanjiMaru/providers/dbProviders.dart';
 import 'package:KanjiMaru/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
+class Home extends ConsumerWidget {
+  static Widget home(BuildContext context, ScopedReader watch) {
+    Stream<User> user = watch(userStream.stream);
 
-class _HomeState extends State<Home> {
-  static Widget home(BuildContext context) {
-    User user = Provider.of<User>(context);
-    Vocab vocab = Provider.of<Vocab>(context);
+    //User user = Provider.of<User>(context);
+    //Vocab vocab = Provider.of<Vocab>(context);
 
     double textSizeNav = 12.0;
     return Padding(
@@ -43,14 +44,22 @@ class _HomeState extends State<Home> {
                         padding: const EdgeInsets.all(0.0),
                         icon: Icon(Icons.offline_pin),
                         onPressed: () {
-                          context.read<Auth>().signOut();
+                          watch(auth).signOut();
+                          //context.read<Auth>().signOut();
                           Navigator.pushNamed(context, 'landing');
                         },
                       ),
                     ),
                     Expanded(
                       flex: 1,
-                      child: Icon(Icons.favorite),
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0.0),
+                        icon: Icon(Icons.offline_pin),
+                        onPressed: () {
+                          print(watch(graphics));
+                          //print(watch(dictionaryProvider));
+                        },
+                      ),
                     ),
                     Expanded(
                       flex: 1,
@@ -103,14 +112,14 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return DefaultTabController(
       initialIndex: 0,
       length: 4,
       child: Scaffold(
         extendBody: false,
         extendBodyBehindAppBar: false,
-        body: home(context),
+        body: home(context, watch),
       ),
     );
   }
