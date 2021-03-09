@@ -19,20 +19,22 @@ class LandingPage extends ConsumerWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           User user = snapshot.data;
-          print(user);
-          if (user != null) {
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushNamed(context, 'home');
-            });
-          } else {
+          if (user == null) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushNamed(context, 'login');
             });
+            return Container();
           }
-
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushNamed(context, 'home');
+          });
           return Container();
         } else {
-          return Container();
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
       },
     );

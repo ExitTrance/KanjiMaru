@@ -18,7 +18,7 @@ class LoadingPage extends ConsumerWidget {
             error: (err, stack) => Text('Error: $err'),
             data: (data) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushNamed(context, 'landing');
+                Navigator.pushReplacementNamed(context, 'landing');
               });
               return Container();
             }),

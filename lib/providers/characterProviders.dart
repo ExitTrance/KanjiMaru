@@ -2,7 +2,7 @@ import 'package:KanjiMaru/services/character_parser.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final characters = FutureProvider<Map<dynamic, dynamic>>((ref) async {
-  return loadCharacterData();
+  return await loadCharacterData();
 });
 
 final dictionary = Provider<Map>((ref) {

@@ -7,17 +7,12 @@ import 'package:KanjiMaru/pages/HomePage/StatisticsTab.dart';
 import 'package:KanjiMaru/providers/authProviders.dart';
 import 'package:KanjiMaru/providers/characterProviders.dart';
 import 'package:KanjiMaru/providers/dbProviders.dart';
-import 'package:KanjiMaru/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 
 class Home extends ConsumerWidget {
   static Widget home(BuildContext context, ScopedReader watch) {
     Stream<User> user = watch(userStream.stream);
-
-    //User user = Provider.of<User>(context);
-    //Vocab vocab = Provider.of<Vocab>(context);
 
     double textSizeNav = 12.0;
     return Padding(
@@ -45,8 +40,7 @@ class Home extends ConsumerWidget {
                         icon: Icon(Icons.offline_pin),
                         onPressed: () {
                           watch(auth).signOut();
-                          //context.read<Auth>().signOut();
-                          Navigator.pushNamed(context, 'landing');
+                          //Navigator.pushNamed(context, 'landing');
                         },
                       ),
                     ),
@@ -117,8 +111,6 @@ class Home extends ConsumerWidget {
       initialIndex: 0,
       length: 4,
       child: Scaffold(
-        extendBody: false,
-        extendBodyBehindAppBar: false,
         body: home(context, watch),
       ),
     );

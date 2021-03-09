@@ -1,4 +1,4 @@
-import 'package:KanjiMaru/pages/LoginPage/LandingPage.dart';
+import 'package:KanjiMaru/pages/LandingPage.dart';
 import 'package:KanjiMaru/pages/LoginPage/LoginPage.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
 import 'package:KanjiMaru/pages/LoadingPage.dart';
@@ -16,7 +16,9 @@ Map graphics;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -24,23 +26,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ProviderScope(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => LoadingPage(),
-          'landing': (context) => LandingPage(context),
-          'login': (context) => LoginPage(),
-          'home': (context) => Home(),
-          'study': (context) => StudyPage(),
-        },
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Color(0xFF000000),
-          accentColor: Color(0xFFEE892C),
-          scaffoldBackgroundColor: Color(0xFF131522),
-          fontFamily: 'OpenSans',
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => LoadingPage(),
+        'landing': (context) => LandingPage(context),
+        'login': (context) => LoginPage(),
+        'home': (context) => Home(),
+        'study': (context) => StudyPage(),
+      },
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Color(0xFF000000),
+        accentColor: Color(0xFFEE892C),
+        scaffoldBackgroundColor: Color(0xFF131522),
+        fontFamily: 'OpenSans',
       ),
     );
   }
