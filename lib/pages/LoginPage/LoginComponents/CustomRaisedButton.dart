@@ -10,11 +10,11 @@ class CustomRaisedButton extends StatelessWidget {
   })  : assert(borderRadius != null),
         assert(height != null);
 
-  final Widget child;
-  final Color color;
+  final Widget? child;
+  final Color? color;
   final double borderRadius;
   final double height;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {

@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'pages/StudyPage.dart';
 import 'package:flutter/services.dart';
 
-Map dictionary;
-Map graphics;
+Map? dictionary;
+Map? graphics;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => LoadingPage(),
-        'landing': (context) => LandingPage(context),
+        'landing': (context) => LandingPage(),
         'login': (context) => LoginPage(),
         'home': (context) => Home(),
         'study': (context) => StudyPage(),

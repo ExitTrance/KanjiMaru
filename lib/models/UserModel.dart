@@ -1,9 +1,9 @@
 class User {
   User({this.reviewSet, this.stats, this.settings});
 
-  List<ReviewItem> reviewSet;
-  Statistics stats;
-  UserSettings settings;
+  List<ReviewItem>? reviewSet;
+  Statistics? stats;
+  UserSettings? settings;
 }
 
 class ReviewItem {

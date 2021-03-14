@@ -1,4 +1,3 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 class StudyPage extends StatefulWidget {
@@ -16,10 +15,10 @@ class _StudyPageState extends State<StudyPage> {
         title: Text('10/100'),
       ),
       body: Center(
-        child: Column(
+        child: Column( 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlipCard(
+            /* FlipCard(
               onFlip: () {
                 setState(() {
                   flipped = !flipped;
@@ -48,7 +47,7 @@ class _StudyPageState extends State<StudyPage> {
                       fontSize: 25, color: Theme.of(context).accentColor),
                 )),
               ),
-            ),
+            ), */
             Padding(
               padding: const EdgeInsets.only(top: 32.0),
               child: !flipped

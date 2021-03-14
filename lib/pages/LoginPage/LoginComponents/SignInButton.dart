@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class SignInButton extends CustomRaisedButton {
   SignInButton({
-    @required String text,
-    Color color,
-    Color textColor,
-    VoidCallback onPressed,
+    required String text,
+    Color? color,
+    Color? textColor,
+    VoidCallback? onPressed,
   })  : assert(text != null),
         super(
           child: Text(

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoadingPage extends ConsumerWidget {
   LoadingPage({this.characterCallback});
-  final Function characterCallback;
+  final Function? characterCallback;
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
@@ -17,7 +17,7 @@ class LoadingPage extends ConsumerWidget {
             loading: () => Center(child: CircularProgressIndicator()),
             error: (err, stack) => Text('Error: $err'),
             data: (data) {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
+              SchedulerBinding.instance!.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, 'landing');
               });
               return Container();

@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 class ReviewItem {
-  ReviewItem({@required this.character, @required this.itemType});
+  ReviewItem({required this.character, required this.itemType});
   String character;
 
   //type of item [definition, character_write, recall]
@@ -15,8 +15,8 @@ class ReviewItem {
   double daysBetweenReviews = 1.0;
   DateTime dateLastReviewed = DateTime.now();
 
-  double percentOverdue;
-  double difficultyWeight;
+  late double percentOverdue;
+  late double difficultyWeight;
 
   void calculatePercentOverdue(
       double performanceRating, bool correct, DateTime date) {

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class OverviewCard extends StatelessWidget {
   const OverviewCard({
     this.flex = 1,
-    @required this.titleText,
+    required this.titleText,
     this.subText,
-    @required this.midContent,
+    required this.midContent,
     this.buttonText = "Button",
     this.cardBackgroundColor = const Color(0xFF262A34),
-    @required this.cardTheme,
-    @required this.buttonFunction,
+    required this.cardTheme,
+    required this.buttonFunction,
   });
   final int flex;
   final String titleText;
-  final RichText subText;
+  final RichText? subText;
   final Widget midContent;
   final String buttonText;
   final Color cardBackgroundColor;
@@ -66,7 +66,7 @@ class OverviewCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      subText != null ? subText : Container(),
+                      subText != null ? subText! : Container(),
                       TextButton(
                         style: TextButton.styleFrom(
                             primary: Colors.white,
@@ -74,7 +74,7 @@ class OverviewCard extends StatelessWidget {
                             textStyle: TextStyle(fontSize: 10)),
                         //shape: RoundedRectangleBorder(
                         //   borderRadius: BorderRadius.circular(8)),
-                        onPressed: buttonFunction,
+                        onPressed: buttonFunction as void Function()?,
                         //color: cardTheme,
                         child: Text(buttonText),
                       ),

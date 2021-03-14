@@ -5,12 +5,12 @@ final characters = FutureProvider<Map<dynamic, dynamic>>((ref) async {
   return await loadCharacterData();
 });
 
-final dictionary = Provider<Map>((ref) {
-  final AsyncData<Map> dic = ref.watch(characters).data;
+final dictionary = Provider<Map?>((ref) {
+  final AsyncData<Map> dic = ref.watch(characters).data!;
   return dic.value['dictionary'];
 });
 
-final graphics = Provider<Map>((ref) {
-  final AsyncData<Map> dic = ref.watch(characters).data;
+final graphics = Provider<Map?>((ref) {
+  final AsyncData<Map> dic = ref.watch(characters).data!;
   return dic.value['graphics'];
 });

@@ -6,6 +6,6 @@ final auth = Provider<Auth>((ref) {
   return Auth(FirebaseAuth.instance);
 });
 
-final authState = StreamProvider<User>((ref) {
+final authState = StreamProvider<User?>((ref) {
   return ref.watch(auth).authStateChanges;
 });

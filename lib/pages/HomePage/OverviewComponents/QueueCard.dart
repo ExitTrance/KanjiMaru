@@ -5,13 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class QueueCard extends StatelessWidget {
   const QueueCard({
-    @required this.cardTheme,
-    @required this.titleText,
-    @required this.contentText,
-    @required this.inQueue,
-    @required this.buttonText,
-    @required this.svgPath,
-    @required this.buttonFunction,
+    required this.cardTheme,
+    required this.titleText,
+    required this.contentText,
+    required this.inQueue,
+    required this.buttonText,
+    required this.svgPath,
+    required this.buttonFunction,
     this.svgSemanticLabel = 'Icon',
   });
 

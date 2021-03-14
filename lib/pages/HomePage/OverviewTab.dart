@@ -5,7 +5,7 @@ import 'package:KanjiMaru/models/UserModel.dart';
 
 class OverviewTab extends StatelessWidget {
   const OverviewTab({
-    @required this.user,
+    required this.user,
   });
 
   final Stream<User> user;
@@ -22,7 +22,9 @@ class OverviewTab extends StatelessWidget {
           lessonsRemaining: 50,
           reviewsRemaining: 10,
           buttonText: 'Quick Study',
-          buttonFunction: () {},
+          buttonFunction: () {
+            Navigator.pushNamed(context, 'study');
+          },
           svgPath: 'assets/icons/goal-svgrepo-com.svg',
           svgSize: 50.0,
           progressRadiusOuter: 80.0,

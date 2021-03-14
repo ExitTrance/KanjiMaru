@@ -1,7 +1,7 @@
 class Vocab {
   Vocab({this.vocabListName = "", this.vocab = const []});
-  String vocabListName;
-  List vocab;
+  String? vocabListName;
+  List? vocab;
 
   factory Vocab.fromJson(Map<String, dynamic> map) {
     return Vocab(
@@ -35,26 +35,26 @@ class VocabItem {
   // section:       ""
 
   //Can either be definition(JP -> ENG) or recall (ENG -> JP)
-  String vocabType;
+  String? vocabType;
 
   ///reading
-  String reading;
+  String? reading;
 
-  String definition;
+  String? definition;
 
   //Will contain the kanji readings
   //If there is no kanji, it will be the same as the vocab item
-  String furigana;
+  String? furigana;
 
   //Can either be 'y' for it does contain a kanji
   //Or the empty string to indicate hiragana/katakana only
-  String containsKanji;
+  String? containsKanji;
 
   //Tags[0] for genki
-  String section;
+  String? section;
 
   //If it's a noun/verb or just not specified
-  String wordType;
+  String? wordType;
 
   factory VocabItem.fromMap(Map<String, dynamic> data) {
     return VocabItem(
@@ -68,7 +68,7 @@ class VocabItem {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String?, dynamic> toMap() {
     return {
       reading: {
         'vocabType': vocabType,

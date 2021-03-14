@@ -6,20 +6,20 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class GoalCard extends StatelessWidget {
   const GoalCard({
-    @required this.cardTheme,
-    @required this.titleText,
-    @required this.currentStreak,
+    required this.cardTheme,
+    required this.titleText,
+    required this.currentStreak,
     this.lessonsRemaining = 0,
     this.reviewsRemaining = 0,
-    @required this.buttonText,
-    @required this.buttonFunction,
-    @required this.svgPath,
-    @required this.svgSize,
+    required this.buttonText,
+    required this.buttonFunction,
+    required this.svgPath,
+    required this.svgSize,
     this.semanticLabel = "Icon",
-    @required this.progressRadiusOuter,
-    @required this.progressRadiusInner,
-    @required this.lessonColor,
-    @required this.reviewColor,
+    required this.progressRadiusOuter,
+    required this.progressRadiusInner,
+    required this.lessonColor,
+    required this.reviewColor,
   });
 
   final Color cardTheme;

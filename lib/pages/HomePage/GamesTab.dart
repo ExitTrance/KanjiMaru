@@ -50,7 +50,7 @@ Widget games(BuildContext context) {
 }
 
 class StudyListTile extends StatelessWidget {
-  StudyListTile({@required this.text, @required this.icon});
+  StudyListTile({required this.text, required this.icon});
 
   final String text;
   final IconData icon;
