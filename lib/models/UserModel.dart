@@ -1,28 +1,70 @@
 class User {
-  User({this.reviewSet, this.stats, this.settings});
+  User({this.stats, this.settings, this.userList});
 
-  List<ReviewItem>? reviewSet;
   Statistics? stats;
   UserSettings? settings;
-}
-
-class ReviewItem {
-  ReviewItem({this.char = '', this.desc = ''});
-
-  String char;
-  String desc;
+  UserList? userList;
 }
 
 class Statistics {
-  Statistics({this.kanjiLearned = 0, this.reviews = 0, this.vocabLearned = 0});
+  Statistics({
+    this.lessonsDone = 0,
+    this.reviewsDone = 0,
+    this.lastOnline,
+  });
 
-  int kanjiLearned;
-  int reviews;
-  int vocabLearned;
+  int lessonsDone;
+  int reviewsDone;
+
+  DateTime? lastOnline;
 }
 
 class UserSettings {
-  UserSettings({this.reviewGoal = 100});
+  UserSettings({
+    this.displayName = "",
+    this.email = "",
+    this.reviewDailyGoal = 50,
+    this.lessonDailyGoal = 5,
+    this.currentActiveLists = const [],
+    this.resetTime = "0000",
+  });
 
-  int reviewGoal;
+  String displayName;
+  String email;
+
+  int reviewDailyGoal;
+  int lessonDailyGoal;
+
+  List currentActiveLists;
+
+  String resetTime;
+}
+
+class UserList {
+  UserList({this.items = const {}});
+
+  Map<String, UserListItem> items;
+}
+
+class UserListItem {
+  UserListItem({
+    this.status = 1,
+    this.nextDueDate,
+    this.reading = "",
+    this.definition = "",
+    this.furigana = "",
+    this.containsKanji = "",
+    this.listName = "",
+    this.sectionTitle = "",
+  });
+
+  int status; // 1 - New / 2 - Learning / 3 - Waiting for Review / 4 - Reviewing
+  DateTime? nextDueDate; // Some date time object
+  String reading; // ex. "今"
+  String definition; // ex. "now"
+  String furigana; // ex. "今[いま]"
+  String containsKanji; // ex. "y"
+
+  String listName; // ex. "Genki-1"
+  String sectionTitle; // ex. "1 - Meeting Friends"
 }

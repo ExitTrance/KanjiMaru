@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:KanjiMaru/models/VocabModel.dart';
+import 'package:KanjiMaru/models/ItemListModel.dart';
 import 'package:flutter/services.dart';
 
-Future<Vocab> parseListTest() async {
+Future<ItemList> parseListTest() async {
   String json = await _loadList();
   var vocab = jsonDecode(json);
-  return Vocab.fromJson(vocab);
+  return ItemList.fromFile(vocab);
 }
 
 Future<Map> parseList() async {
@@ -14,10 +14,10 @@ Future<Map> parseList() async {
   var vocab = jsonDecode(json)['notes'];
   var map =
       Map.fromIterable(vocab, key: (e) => e['fields'][0], value: (e) => e);
-  
+
   return map;
 }
 
 Future<String> _loadList() async {
-  return await rootBundle.loadString('assets/vocab_list/Genki-1-2ndEdition.json');
+  return await rootBundle.loadString('assets/vocab_list/Genki_1/deck.json');
 }

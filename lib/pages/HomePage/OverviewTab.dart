@@ -5,10 +5,10 @@ import 'package:KanjiMaru/models/UserModel.dart';
 
 class OverviewTab extends StatelessWidget {
   const OverviewTab({
-    required this.user,
+    this.user,
   });
 
-  final Stream<User> user;
+  final Stream<User>? user;
 
   @override
   Widget build(BuildContext context) {

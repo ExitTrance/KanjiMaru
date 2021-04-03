@@ -6,7 +6,12 @@ class DecksTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text('Decks')),
+      child: Column(children: [
+        Expanded(child: Text('Hi.')),
+        Expanded(child: Text('Hi.')),
+        Expanded(child: Text('Hi.')),
+      ],),
     );
   }
 }
+

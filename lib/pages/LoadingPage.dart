@@ -17,6 +17,8 @@ class LoadingPage extends ConsumerWidget {
             loading: () => Center(child: CircularProgressIndicator()),
             error: (err, stack) => Text('Error: $err'),
             data: (data) {
+              print(watch(dictionary)?.length);
+              print(watch(dictionary)?.keys);
               SchedulerBinding.instance!.addPostFrameCallback((_) {
                 Navigator.pushReplacementNamed(context, 'landing');
               });

@@ -62,6 +62,7 @@ flutter:
   - assets/animCJK-master/dictionaryJa.json
   - assets/animCJK-master/graphicsJa.json
   - assets/vocab_list/Genki-1-2ndEdition.json
+  - assets/vocab_list/Genki_1/deck.json
   - assets/icons/goal-svgrepo-com.svg
   - assets/icons/learn.svg
   - assets/icons/review.svg
