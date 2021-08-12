@@ -1,5 +1,10 @@
 # KanjiMaru
 
+Not in development anymore for reasons I shall not state here. Still loved the design I created, so it will stay up.
+----
+
+
+
 Flashcard and Japanese Characters writing mobile application made in Flutter. Still a work in progress! 
 
 As I have been frustrated by the fact that apps on the market do not provide a 'good' way to learn to write Japanese Characters, I have decided to create my own app.  
