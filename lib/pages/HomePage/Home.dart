@@ -53,10 +53,15 @@ class Home extends ConsumerWidget {
                         onPressed: () {
                           /* watch(userListsName(watch(currentUser)!))
                               .whenData((value) => print(value)); */
-                          watch(definedListsName)
-                              .whenData((value) => print(value));
-                          /* watch(userLists(watch(currentUser)!))
-                              .whenData((value) => print(value[1].returnMap())); */
+                          /* watch(definedListsName)
+                              .whenData((value) => print(value)); */
+                          /* watch(userLists).whenData((value) => print(value));
+
+                          watch(userSettings).whenData((value) => print(value));
+
+                          watch(userStatistics).whenData(
+                              (value) => print(value.reviewsDoneToday)); */
+
                           /* watch(definedListsName)
                               .whenData((value) => print(value.data()));
                           watch(userListsName(watch(currentUser)!))
@@ -72,7 +77,7 @@ class Home extends ConsumerWidget {
                               Database().addDefinedList(value.returnMap())); */
 
                           // Add a defined list to user lists
-                          /* Database().addDefinedListToUserList(
+                          /* Database().setDefinedListToUserList(
                               'Genki-2', watch(currentUser)!); */
                           /* Database().addCustomList(
                               'Genki-4',

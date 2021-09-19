@@ -16,8 +16,10 @@ class GoalCard extends StatelessWidget {
     required this.svgPath,
     required this.svgSize,
     this.semanticLabel = "Icon",
-    required this.progressRadiusOuter,
-    required this.progressRadiusInner,
+    required this.radiusOuter,
+    required this.radiusInner,
+    required this.progressOuter,
+    required this.progressInner,
     required this.lessonColor,
     required this.reviewColor,
   });
@@ -35,8 +37,11 @@ class GoalCard extends StatelessWidget {
   final double svgSize;
   final String semanticLabel;
 
-  final double progressRadiusOuter;
-  final double progressRadiusInner;
+  final double radiusOuter;
+  final double radiusInner;
+
+  final double progressOuter;
+  final double progressInner;
 
   final Color lessonColor;
   final Color reviewColor;
@@ -71,13 +76,13 @@ class GoalCard extends StatelessWidget {
             child: Column(
               children: [
                 CircularPercentIndicator(
-                  radius: progressRadiusOuter,
+                  radius: radiusOuter,
                   lineWidth: 6.0,
-                  percent: 0.2.clamp(.0, 1.0),
+                  percent: progressOuter.clamp(.0, 1.0),
                   center: CircularPercentIndicator(
-                    radius: progressRadiusInner,
+                    radius: radiusInner,
                     lineWidth: 6.0,
-                    percent: 0.5.clamp(.0, 1.0),
+                    percent: progressInner.clamp(.0, 1.0),
                     center: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

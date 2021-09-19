@@ -1,7 +1,7 @@
 import 'package:KanjiMaru/pages/LandingPage.dart';
 import 'package:KanjiMaru/pages/LoginPage/LoginPage.dart';
 import 'package:KanjiMaru/pages/HomePage/Home.dart';
-import 'package:KanjiMaru/pages/LoadingPage.dart';
+import 'package:KanjiMaru/pages/LoadingCharactersPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:stroke_order_animator/strokeOrderAnimationController.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => LoadingPage(),
+        '/': (context) => LoadingCharactersPage(),
         'landing': (context) => LandingPage(),
         'login': (context) => LoginPage(),
         'home': (context) => Home(),
@@ -38,9 +38,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Color(0xFF000000),
-        accentColor: Color(0xFFEE892C),
+        accentColor: Color(0xFFFFFFFF),
         scaffoldBackgroundColor: Color(0xFF131522),
         fontFamily: 'OpenSans',
+        cardColor: Color(0xFF8F22D9),
       ),
     );
   }

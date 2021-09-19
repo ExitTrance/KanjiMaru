@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
+  Database({this.uid = ""});
+
+  final String uid;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Write cron job that periodically checks how many items are pending for a user
@@ -15,7 +18,7 @@ class Database {
   }
 
   // Check if a user list with given name exists
-  Future<bool> userListNameExists(String name, String uid) async {
+  Future<bool> userListNameExists(String name) async {
     var user = await _firestore.collection('userLists').doc(uid).get();
     List names = user.data()?['listNames'];
 
@@ -30,7 +33,7 @@ class Database {
   }
 
   // Add a name to the user 'listNames' array
-  void setUserListName(String name, String uid) {
+  void setUserListName(String name) {
     _firestore.collection('userLists').doc(uid).update({
       'listNames': FieldValue.arrayUnion([name])
     });
@@ -61,31 +64,29 @@ class Database {
     return _firestore.collection('definedLists').get();
   }
 
-  // Get all defined lists name
+  // Get a stream of all defined lists name
   Stream getDefinedListsName() {
     return _firestore.collection('definedLists').doc('allLists').snapshots();
   }
 
   // Helper function for adding a user list
-  void _setUserList(
-      String listName, Map<String, dynamic> data, String uid) async {
+  void _setUserList(String listName, Map<String, dynamic> data) async {
     _firestore
         .collection('userLists')
         .doc(uid)
         .collection('lists')
         .doc(listName)
         .set(data);
-    setUserListName(listName, uid);
+    setUserListName(listName);
   }
 
   // Add a custom list to the users lists
-  void setCustomList(
-      String listName, Map<String, dynamic> data, String uid) async {
+  void setCustomList(String listName, Map<String, dynamic> data) async {
     bool checkDefinedListNames = await definedListNameExists(listName);
-    bool checkUserListNames = await userListNameExists(listName, uid);
+    bool checkUserListNames = await userListNameExists(listName);
 
     if (!checkDefinedListNames & !checkUserListNames) {
-      _setUserList(listName, data, uid);
+      _setUserList(listName, data);
     } else {
       print('Custom list cannot be added.');
       print('Defined List Name exists: $checkDefinedListNames');
@@ -94,14 +95,14 @@ class Database {
   }
 
   // Add a defined list to the user's lists
-  void setDefinedListToUserList(String listName, String uid) async {
+  void setDefinedListToUserList(String listName) async {
     bool checkDefinedListNames = await definedListNameExists(listName);
-    bool checkUserListNames = await userListNameExists(listName, uid);
+    bool checkUserListNames = await userListNameExists(listName);
 
     if (checkDefinedListNames & !checkUserListNames) {
       getDefinedList(listName).then((value) {
-        _setUserList(listName, value.data(), uid);
-        setUserListName(listName, uid);
+        _setUserList(listName, value.data());
+        setUserListName(listName);
       });
     } else {
       print('Defined list cannot be added to the user.');
@@ -111,7 +112,7 @@ class Database {
   }
 
   // Get a single user list by name
-  Future getUserList(String listName, String uid) {
+  Future getUserList(String listName) {
     return _firestore
         .collection('userLists')
         .doc(uid)
@@ -120,8 +121,8 @@ class Database {
         .get();
   }
 
-  // Get all of the users lists
-  Stream getUserLists(String uid) {
+  // Get a stream of all lists belonging to a user
+  Stream getUserLists() {
     return _firestore
         .collection('userLists')
         .doc(uid)
@@ -129,8 +130,18 @@ class Database {
         .snapshots();
   }
 
-  // Get names of every user list
-  Stream getUserListsName(String uid) {
+  // Gets a stream of every list name of a user
+  Stream getUserListsName() {
     return _firestore.collection('userLists').doc(uid).snapshots();
+  }
+
+  // Gets a stream of the user's Settings
+  Stream getUserSettings() {
+    return _firestore.collection('settings').doc(uid).snapshots();
+  }
+
+  // Gets a stream of the user's statistics
+  Stream getUserStatistics() {
+    return _firestore.collection('userStatistics').doc(uid).snapshots();
   }
 }

@@ -1,3 +1,5 @@
+import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 
 class StudyPage extends StatefulWidget {
@@ -6,79 +8,72 @@ class StudyPage extends StatefulWidget {
 }
 
 class _StudyPageState extends State<StudyPage> {
-  bool flipped = false;
-
+  FlipCardController flipper = FlipCardController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('10/100'),
       ),
-      body: Center(
-        child: Column( 
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            /* FlipCard(
-              onFlip: () {
-                setState(() {
-                  flipped = !flipped;
-                });
-              },
-              direction: FlipDirection.HORIZONTAL,
-              front: Container(
-                height: 400,
-                width: 250,
-                color: Theme.of(context).primaryColor,
-                child: Center(
-                    child: Text(
-                  '丸い',
-                  style: TextStyle(
-                      fontSize: 25, color: Theme.of(context).accentColor),
-                )),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 40.0,
+          right: 40.0,
+        ),
+        child: Column(
+          children: [
+            Spacer(),
+            Expanded(
+              flex: 4,
+              child: FlipCard(
+                controller: flipper,
+                direction: FlipDirection.HORIZONTAL,
+                front: Container(
+                  color: Theme.of(context).cardColor,
+                  child: Center(
+                      child: Text(
+                    '丸い',
+                    style: TextStyle(
+                        fontSize: 25, color: Theme.of(context).accentColor),
+                  )),
+                ),
+                back: Container(
+                  color: Theme.of(context).cardColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(),
+                      Center(
+                          child: Text(
+                        'Round',
+                        style: TextStyle(
+                            fontSize: 25, color: Theme.of(context).accentColor),
+                      )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          MaterialButton(
+                            onPressed: () => {flipper.toggleCard()},
+                            child: Text(
+                              'Bad',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          MaterialButton(
+                            onPressed: () => {flipper.toggleCard()},
+                            child: Text(
+                              'Good',
+                              style: TextStyle(color: Colors.green),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              back: Container(
-                height: 400,
-                width: 250,
-                color: Theme.of(context).primaryColor,
-                child: Center(
-                    child: Text(
-                  'Round',
-                  style: TextStyle(
-                      fontSize: 25, color: Theme.of(context).accentColor),
-                )),
-              ),
-            ), */
-            Padding(
-              padding: const EdgeInsets.only(top: 32.0),
-              child: !flipped
-                  ? Container()
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        MaterialButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Bad',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Meh',
-                            style: TextStyle(color: Colors.yellow),
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Good',
-                            style: TextStyle(color: Colors.green),
-                          ),
-                        ),
-                      ],
-                    ),
             ),
+            Spacer(),
           ],
         ),
       ),

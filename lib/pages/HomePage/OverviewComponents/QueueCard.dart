@@ -8,6 +8,7 @@ class QueueCard extends StatelessWidget {
     required this.cardTheme,
     required this.titleText,
     required this.contentText,
+    this.contentOnly = false,
     required this.inQueue,
     required this.buttonText,
     required this.svgPath,
@@ -18,6 +19,7 @@ class QueueCard extends StatelessWidget {
   final Color cardTheme;
   final String titleText;
   final String contentText;
+  final bool contentOnly;
   final int inQueue;
   final String buttonText;
   final String svgPath;
@@ -54,23 +56,25 @@ class QueueCard extends StatelessWidget {
                   contentText,
                   style: TextStyle(fontSize: 10),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                        text: inQueue <= 10000
-                            ? padWhiteSpace(inQueue, 6)
-                            : '10000+',
-                        style: TextStyle(
-                          color: cardTheme,
-                          fontFamily: 'B612Mono',
+                contentOnly
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: inQueue <= 10000
+                                  ? padWhiteSpace(inQueue, 6)
+                                  : '10000+',
+                              style: TextStyle(
+                                color: cardTheme,
+                                fontFamily: 'B612Mono',
+                              ),
+                            ),
+                            TextSpan(text: ' in queue'),
+                          ]),
                         ),
                       ),
-                      TextSpan(text: ' in queue'),
-                    ]),
-                  ),
-                ),
               ],
             ),
           ),

@@ -1,32 +1,37 @@
-class User {
-  User({this.stats, this.settings, this.userList});
-
-  Statistics? stats;
-  UserSettings? settings;
-  UserList? userList;
-}
-
-class Statistics {
-  Statistics({
+class UserStatistics {
+  UserStatistics({
     this.lessonsDone = 0,
     this.reviewsDone = 0,
-    this.lastOnline,
+    this.reviewsDoneToday = 0,
+    this.lessonsDoneToday = 0,
+    this.currentStreak = 0,
   });
 
   int lessonsDone;
   int reviewsDone;
 
-  DateTime? lastOnline;
+  int lessonsDoneToday;
+  int reviewsDoneToday;
+
+  int currentStreak;
+  factory UserStatistics.fromFirestore(Map<String, dynamic> map) {
+    return UserStatistics(
+      lessonsDone: map['lessonsDone'] ?? 0,
+      reviewsDone: map['reviewsDone'] ?? 0,
+      lessonsDoneToday: map['lessonsDoneToday'] ?? 0,
+      reviewsDoneToday: map['reviewsDoneToday'] ?? 0,
+      currentStreak: map['currentStreak'] ?? 0,
+    );
+  }
 }
 
 class UserSettings {
   UserSettings({
     this.displayName = "",
     this.email = "",
-    this.reviewDailyGoal = 50,
-    this.lessonDailyGoal = 5,
-    this.currentActiveLists = const [],
-    this.resetTime = "0000",
+    this.reviewDailyGoal = 0,
+    this.lessonDailyGoal = 0,
+    this.currentActiveList = "",
   });
 
   String displayName;
@@ -35,36 +40,15 @@ class UserSettings {
   int reviewDailyGoal;
   int lessonDailyGoal;
 
-  List currentActiveLists;
+  String currentActiveList;
 
-  String resetTime;
-}
-
-class UserList {
-  UserList({this.items = const {}});
-
-  Map<String, UserListItem> items;
-}
-
-class UserListItem {
-  UserListItem({
-    this.status = 1,
-    this.nextDueDate,
-    this.reading = "",
-    this.definition = "",
-    this.furigana = "",
-    this.containsKanji = "",
-    this.listName = "",
-    this.sectionTitle = "",
-  });
-
-  int status; // 1 - New / 2 - Learning / 3 - Waiting for Review / 4 - Reviewing
-  DateTime? nextDueDate; // Some date time object
-  String reading; // ex. "今"
-  String definition; // ex. "now"
-  String furigana; // ex. "今[いま]"
-  String containsKanji; // ex. "y"
-
-  String listName; // ex. "Genki-1"
-  String sectionTitle; // ex. "1 - Meeting Friends"
+  factory UserSettings.fromFirestore(Map<String, dynamic> map) {
+    return UserSettings(
+      displayName: map['displayName'] ?? '',
+      email: map['email'] ?? '',
+      reviewDailyGoal: map['reviewDailyGoal'] ?? 0,
+      lessonDailyGoal: map['lessonDailyGoal'] ?? 0,
+      currentActiveList: map['currentActiveList'] ?? '',
+    );
+  }
 }
